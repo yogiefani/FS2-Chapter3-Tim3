@@ -1,6 +1,7 @@
 const http = require("http");
 const fs = require("fs");
 const url = require("url");
+const melindaFunc = require("./scripts/melinda.js");
 const { rewriteFromNuril, addTextFromNuril } = require('./scripts/nuril.js');
 
 const contentFileUtama = fs.readFileSync("./index.txt", "utf-8")
@@ -18,7 +19,7 @@ const app = http.createServer(async (req, res) => {
         const updatedContent = await addTextFromNuril("./index.txt", content);
         res.end(updatedContent);
     } else if (pathUrl === "/") {
-        res.end("hellow ke tim 3")        
+        res.end("Hello, Welcome To Team 3!")        
     
     } else if (pathUrl === "/imam") {
         console.log("original data dari index.txt = " + contentFileUtama)
@@ -35,7 +36,18 @@ const app = http.createServer(async (req, res) => {
         }
 
         rewriteFromImam("./index.txt", "HAI TUGAS IMAM !!!")
-    } else {
+        
+    } else if (pathUrl === "/melinda") {
+        try {
+            const result = await melindaFunc(contentFileUtama)
+            res.writeHead(200, { 'Content-Type': 'text/plain' });
+            res.end(result);
+        } catch (err) {
+            res.writeHead(500, { 'Content-Type': 'text/plain' });
+            res.end('Error occurred while processing Melinda\'s request.');
+        }
+    }
+    else {
         res.end("404 page not found")
     }
 })
