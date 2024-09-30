@@ -66,7 +66,8 @@ const app = http.createServer(async (req, res) => {
       res.end(result);
     } catch (err) {
       res.end("Error occurred while processing Fauzan's request.");
-    } else if (pathUrl === "/abdi") {
+    } 
+  } else if (pathUrl === "/abdi") {
     try {
       const result = await rewriteFromAbdi();
       res.end(result);
