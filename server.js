@@ -5,6 +5,7 @@ const url = require("url");
 const melindaFunc = require("./scripts/melinda.js");
 const { rewriteFromNuril, addTextFromNuril } = require('./scripts/nuril.js');
 const { rewriteFromRafif, addTextFromRafif, createRafifFile } = require("./scripts/rafif.js");
+const rewriteFromMuria = require("./scripts/muria.js");
 
 const contentFileUtama = fs.readFileSync("./index.txt", "utf-8")
 
@@ -56,6 +57,18 @@ const app = http.createServer(async (req, res) => {
         const content = "Hello! You are in rafif.txt file";
         const createResult = await createRafifFile("./rafif.txt", content);
         res.end(createResult);
+
+    } else if (pathUrl === "/muria") { 
+        try {
+            const result = await rewriteFromMuria();
+            res.setHeader('Content-Type', 'text/plain');
+            res.end(result);
+        } catch (error) {
+            console.log(error);
+            res.setHeader('Content-Type', 'text/plain');
+            res.end('Error occurred while processing Muria\'s request.');
+        }
+        
     } else if (pathUrl === "/") {
         res.end("Hello, Welcome To Team 3!")
 
