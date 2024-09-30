@@ -45,11 +45,11 @@ const app = http.createServer(async (req, res) => {
         }
 
     } else if (pathUrl === "/rafif") {
-        const content = "This file has been re-written by Rafif\n";
+        const content = "This file has been re-written by Rafif";
         const updatedContent = await rewriteFromRafif("./index.txt", content);
         res.end(updatedContent);
     } else if (pathUrl === "/rafif/add") {
-        const content = "How are you all today? 😂";
+        const content = "\nHow are you all today?";
         const updatedContent = await addTextFromRafif("./index.txt", content);
         res.end(updatedContent);
     } else if (pathUrl === "/rafif/rafif.txt") {
