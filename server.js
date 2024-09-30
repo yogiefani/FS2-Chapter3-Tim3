@@ -1,8 +1,10 @@
 const http = require("http");
 const fs = require("fs");
+const fsAsync = require("fs").promises
 const url = require("url");
 const melindaFunc = require("./scripts/melinda.js");
 const { rewriteFromNuril, addTextFromNuril } = require('./scripts/nuril.js');
+const { rewriteFromRafif, addTextFromRafif, createRafifFile } = require("./scripts/rafif.js");
 
 const contentFileUtama = fs.readFileSync("./index.txt", "utf-8")
 
@@ -18,14 +20,12 @@ const app = http.createServer(async (req, res) => {
         const content = "\n- Adding New text from nuril222";
         const updatedContent = await addTextFromNuril("./index.txt", content);
         res.end(updatedContent);
-    } else if (pathUrl === "/") {
-        res.end("Hello, Welcome To Team 3!")        
-    
+
     } else if (pathUrl === "/imam") {
         console.log("original data dari index.txt = " + contentFileUtama)
         async function rewriteFromImam(filepath, content) {
             try {
-                await fsAsync.writeFile(filepath, content) 
+                await fsAsync.writeFile(filepath, content)
                 console.log("sukses nulis ulang file")
                 const resultRewrite = await fsAsync.readFile(filepath, "utf-8")
                 console.log(resultRewrite)
@@ -34,9 +34,8 @@ const app = http.createServer(async (req, res) => {
                 console.log(error)
             }
         }
-
         rewriteFromImam("./index.txt", "HAI TUGAS IMAM !!!")
-        
+
     } else if (pathUrl === "/melinda") {
         try {
             const result = await melindaFunc(contentFileUtama)
@@ -44,8 +43,23 @@ const app = http.createServer(async (req, res) => {
         } catch (err) {
             res.end('Error occurred while processing Melinda\'s request.');
         }
-    }
-    else {
+
+    } else if (pathUrl === "/rafif") {
+        const content = "This file has been re-written by Rafif";
+        const updatedContent = await rewriteFromRafif("./index.txt", content);
+        res.end(updatedContent);
+    } else if (pathUrl === "/rafif/add") {
+        const content = "\nHow are you all today?";
+        const updatedContent = await addTextFromRafif("./index.txt", content);
+        res.end(updatedContent);
+    } else if (pathUrl === "/rafif/rafif.txt") {
+        const content = "Hello! You are in rafif.txt file";
+        const createResult = await createRafifFile("./rafif.txt", content);
+        res.end(createResult);
+    } else if (pathUrl === "/") {
+        res.end("Hello, Welcome To Team 3!")
+
+    } else {
         res.end("404 page not found")
     }
 })
