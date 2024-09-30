@@ -5,6 +5,7 @@ const url = require("url");
 const melindaFunc = require("./scripts/melinda.js");
 const { rewriteFromNuril, addTextFromNuril } = require('./scripts/nuril.js');
 const { rewriteFromRafif, addTextFromRafif, createRafifFile } = require("./scripts/rafif.js");
+const { rewriteFromZainal, addTextFromZainal } = require('./scripts/zainal.js');
 
 const contentFileUtama = fs.readFileSync("./index.txt", "utf-8")
 
@@ -20,7 +21,6 @@ const app = http.createServer(async (req, res) => {
         const content = "\n- Adding New text from nuril222";
         const updatedContent = await addTextFromNuril("./index.txt", content);
         res.end(updatedContent);
-
     } else if (pathUrl === "/imam") {
         console.log("original data dari index.txt = " + contentFileUtama)
         async function rewriteFromImam(filepath, content) {
@@ -35,7 +35,6 @@ const app = http.createServer(async (req, res) => {
             }
         }
         rewriteFromImam("./index.txt", "HAI TUGAS IMAM !!!")
-
     } else if (pathUrl === "/melinda") {
         try {
             const result = await melindaFunc(contentFileUtama)
@@ -43,7 +42,6 @@ const app = http.createServer(async (req, res) => {
         } catch (err) {
             res.end('Error occurred while processing Melinda\'s request.');
         }
-
     } else if (pathUrl === "/rafif") {
         const content = "This file has been re-written by Rafif";
         const updatedContent = await rewriteFromRafif("./index.txt", content);
@@ -56,9 +54,16 @@ const app = http.createServer(async (req, res) => {
         const content = "Hello! You are in rafif.txt file";
         const createResult = await createRafifFile("./rafif.txt", content);
         res.end(createResult);
+    } else if (pathUrl === "/zainal") {
+        const content = "Haloo guys";
+        const updatedContent = await rewriteFromZainal("./index.txt", content);
+        res.end(updatedContent);
+    } else if (pathUrl === "/zainal/add") {
+        const content = "\nNama saya Zainal";
+        const updatedContent = await addTextFromZainal("./index.txt", content);
+        res.end(updatedContent);
     } else if (pathUrl === "/") {
         res.end("Hello, Welcome To Team 3!")
-
     } else {
         res.end("404 page not found")
     }
