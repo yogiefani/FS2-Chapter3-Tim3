@@ -4,6 +4,7 @@ const fsAsync = require("fs").promises;
 const url = require("url");
 const melindaFunc = require("./scripts/melinda.js");
 const fauzanFunc = require("./scripts/fauzan.js");
+const rewriteFromAbdi = require("./scripts/abdi.js");
 
 const { rewriteFromNuril, addTextFromNuril } = require("./scripts/nuril.js");
 const {
@@ -65,6 +66,12 @@ const app = http.createServer(async (req, res) => {
       res.end(result);
     } catch (err) {
       res.end("Error occurred while processing Fauzan's request.");
+    } else if (pathUrl === "/abdi") {
+    try {
+      const result = await rewriteFromAbdi();
+      res.end(result);
+    } catch (err) {
+      res.end("Error occurred while processing Abdi's request.");
     }
   } else if (pathUrl === "/") {
     res.end("Hello, Welcome To Team 3!");
