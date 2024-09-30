@@ -64,7 +64,7 @@ const app = http.createServer(async (req, res) => {
       const result = await fauzanFunc(contentFileUtama);
       res.end(result);
     } catch (err) {
-      res.end("Error occurred while processing Melinda's request.");
+      res.end("Error occurred while processing Fauzan's request.");
     }
   } else if (pathUrl === "/") {
     res.end("Hello, Welcome To Team 3!");
