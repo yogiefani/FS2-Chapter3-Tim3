@@ -74,4 +74,4 @@ const port = 3000;
 app.listen(port, () => {
     const url = `http://localhost:${port}`;
     console.log(`Click to open: \x1b[36m%s\x1b[0m`, url);
-});
+}); 
