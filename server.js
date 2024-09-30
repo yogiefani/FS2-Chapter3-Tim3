@@ -40,10 +40,8 @@ const app = http.createServer(async (req, res) => {
     } else if (pathUrl === "/melinda") {
         try {
             const result = await melindaFunc(contentFileUtama)
-            res.writeHead(200, { 'Content-Type': 'text/plain' });
             res.end(result);
         } catch (err) {
-            res.writeHead(500, { 'Content-Type': 'text/plain' });
             res.end('Error occurred while processing Melinda\'s request.');
         }
     }
