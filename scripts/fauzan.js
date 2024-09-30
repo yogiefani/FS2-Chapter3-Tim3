@@ -14,7 +14,7 @@ async function rewriteAndReadFile(contentFileUtama) {
         return responseContent;
     } catch (error) {
         console.error('Error:', error);
-        throw new Error('Error occurred while processing Melinda\'s request.');
+        throw new Error('Error occurred while processing Fauzan\'s request.');
     }
 }
 
