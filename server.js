@@ -2,16 +2,16 @@ const http = require("http");
 const fs = require("fs");
 const fsAsync = require("fs").promises;
 const url = require("url");
-// const melindaFunc = require("./scripts/melinda.js");
-// const fauzanFunc = require("./scripts/fauzan.js");
-// const rewriteFromAbdi = require("./scripts/abdi.js");
-// const rewriteFromMuria = require("./scripts/muria.js");
-// const { rewriteFromNuril, addTextFromNuril } = require("./scripts/nuril.js");
-// const {
-//   rewriteFromRafif,
-//   addTextFromRafif,
-//   createRafifFile,
-// } = require("./scripts/rafif.js");
+const melindaFunc = require("./scripts/melinda.js");
+const fauzanFunc = require("./scripts/fauzan.js");
+const rewriteFromAbdi = require("./scripts/abdi.js");
+const rewriteFromMuria = require("./scripts/muria.js");
+const { rewriteFromNuril, addTextFromNuril } = require("./scripts/nuril.js");
+const {
+  rewriteFromRafif,
+  addTextFromRafif,
+  createRafifFile,
+} = require("./scripts/rafif.js");
 const rewriteFromZainal = require("./scripts/zainal.js");
 const contentFileUtama = fs.readFileSync("./index.txt", "utf-8");
 
