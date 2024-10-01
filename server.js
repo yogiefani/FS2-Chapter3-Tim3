@@ -6,20 +6,18 @@ const melindaFunc = require("./scripts/melinda.js");
 const fauzanFunc = require("./scripts/fauzan.js");
 const rewriteFromAbdi = require("./scripts/abdi.js");
 const rewriteFromMuria = require("./scripts/muria.js");
-
 const { rewriteFromNuril, addTextFromNuril } = require("./scripts/nuril.js");
 const {
   rewriteFromRafif,
   addTextFromRafif,
   createRafifFile,
 } = require("./scripts/rafif.js");
-
+const rewriteFromZainal = require("./scripts/zainal.js");
 const contentFileUtama = fs.readFileSync("./index.txt", "utf-8");
 
 const app = http.createServer(async (req, res) => {
   console.log(req.url);
   const pathUrl = req.url;
-
   if (pathUrl === "/nuril") {
     const content = "this file got rewrite from Nuril";
     const updatedContent = await rewriteFromNuril("./index.txt", content);
@@ -85,7 +83,15 @@ const app = http.createServer(async (req, res) => {
         res.setHeader('Content-Type', 'text/plain');
         res.end('Error occurred while processing Muria\'s request.');
     }
-
+  } else if (pathUrl === "/zainal") {
+    try {
+      const content = "This file has been rewritten by Zainal";
+      const result = await rewriteFromZainal("./index.txt", content);
+      res.end(result);
+    } catch (error) {
+      console.error(error);
+      res.end("Error occurred while processing Zainal's request.");
+    }
   } else if (pathUrl === "/") {
     res.end("Hello, Welcome To Team 3!");
   } else {
@@ -94,7 +100,6 @@ const app = http.createServer(async (req, res) => {
 });
 
 const port = 3000;
-
 app.listen(port, () => {
   const url = `http://localhost:${port}`;
   console.log(`Click to open: \x1b[36m%s\x1b[0m`, url);
