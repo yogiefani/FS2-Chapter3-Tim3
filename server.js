@@ -5,6 +5,7 @@ const url = require("url");
 const melindaFunc = require("./scripts/melinda.js");
 const fauzanFunc = require("./scripts/fauzan.js");
 const rewriteFromAbdi = require("./scripts/abdi.js");
+const rewriteFromMuria = require("./scripts/muria.js");
 
 const { rewriteFromNuril, addTextFromNuril } = require("./scripts/nuril.js");
 const {
@@ -74,6 +75,17 @@ const app = http.createServer(async (req, res) => {
     } catch (err) {
       res.end("Error occurred while processing Abdi's request.");
     }
+  } else if (pathUrl === "/muria") { 
+    try {
+        const result = await rewriteFromMuria();
+        res.setHeader('Content-Type', 'text/plain');
+        res.end(result);
+    } catch (error) {
+        console.log(error);
+        res.setHeader('Content-Type', 'text/plain');
+        res.end('Error occurred while processing Muria\'s request.');
+    }
+
   } else if (pathUrl === "/") {
     res.end("Hello, Welcome To Team 3!");
   } else {
