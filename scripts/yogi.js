@@ -12,6 +12,19 @@ async function rewriteFromYogi(filePath, content) {
     
 }
 
+async function addTextFromYogi(filePath, content) {
+    try {
+        await fsAsync.appendFile(filePath, content);
+        console.log("Success to add additional text in index.txt");
+        const resultAdd = await fsAsync.readFile(filePath, content);
+        return resultAdd
+    } catch (error) {
+        console.log(error);
+    }
+    
+}
+
 module.exports = {
-    rewriteFromYogi
+    rewriteFromYogi,
+    addTextFromYogi
 };

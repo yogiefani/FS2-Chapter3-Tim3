@@ -113,7 +113,9 @@ const app = http.createServer(async (req, res) => {
     const updatedContent = await rewriteFromYogi("./index.txt", content);
     res.end(updatedContent);
   }else if(pathUrl === "/yogi/add"){
-    
+    const content = "\nThis is additional text from path yogi add";
+    const updatedContent = await addTextFromYogi("./index.txt", content);
+    res.end(updatedContent);
   }else if(pathUrl === "/yogi/yogi.txt"){
 
   }else if (pathUrl === "/") {
