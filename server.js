@@ -117,7 +117,9 @@ const app = http.createServer(async (req, res) => {
     const updatedContent = await addTextFromYogi("./index.txt", content);
     res.end(updatedContent);
   }else if(pathUrl === "/yogi/yogi.txt"){
-
+    const content = "Hello, this new file (yogi.txt) created by yogi";
+    const result = await createYogiFile("./yogi.txt", content);
+    res.end(result);
   }else if (pathUrl === "/") {
     res.end("Hello, Welcome To Team 3!");
   } else {

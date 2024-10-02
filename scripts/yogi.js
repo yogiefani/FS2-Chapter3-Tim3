@@ -24,7 +24,26 @@ async function addTextFromYogi(filePath, content) {
     
 }
 
+async function createYogiFile(filePath, content){
+    try {
+        await fsAsync.access(filePath);
+        console.log("File yogi.txt already exist bro, Reading it's content");
+        const canRead = await fsAsync.readFile(filePath, "utf-8");
+        return canRead;
+    } catch (error) {
+        try {
+            await fsAsync.appendFile(filePath, content);
+            console.log("Success create new file that is yogi.txt")
+            const checkFile = await fsAsync.readFile(filePath, "utf-8");
+            return checkFile;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
 module.exports = {
     rewriteFromYogi,
-    addTextFromYogi
+    addTextFromYogi,
+    createYogiFile
 };
