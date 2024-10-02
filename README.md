@@ -40,5 +40,4 @@ Tampilan dari halaman jalannya server
 1. Clone repository ini atau unduh semua file.
 2. Buka file `index.html` di browser Anda.
 3. Profil tim akan ditampilkan, dengan fitur interaktif yang diimplementasikan menggunakan JavaScript DOM.
-4. NPM I
-5. NPM RUN DEV
+4. node server.js
